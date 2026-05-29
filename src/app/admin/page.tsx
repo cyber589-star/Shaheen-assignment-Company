@@ -83,7 +83,7 @@ export default function AdminPage() {
     { label: 'WhatsApp', value: u.whatsapp, icon: Phone },
     { label: 'Email', value: u.email || '—', icon: Mail },
     { label: 'Package', value: u.package?.toUpperCase(), icon: CreditCard },
-    { label: 'Course', value: u.course, icon: BookOpen },
+    { label: 'Work', value: u.course, icon: BookOpen },
     { label: 'Qualification', value: u.qualification, icon: FileInput },
     { label: 'Gender', value: u.gender, icon: Users },
     { label: 'Payment Method', value: u.payment_method?.toUpperCase(), icon: DollarSign },

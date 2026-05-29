@@ -36,12 +36,18 @@ export default function CompanyStaff() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: 0.05 }}
-          className="glass rounded-[2rem] p-6 sm:p-8 border-lime/30 max-w-sm mx-auto mb-8 text-center relative overflow-hidden card-safe"
+          className="glass rounded-[2rem] p-6 sm:p-8 border-lime/40 max-w-sm mx-auto mb-8 text-center relative overflow-hidden card-safe shadow-[0_0_60px_-12px_rgba(204,255,0,0.15)]"
         >
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-lime/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-lime/5 rounded-full blur-3xl" />
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-lime text-black text-[10px] font-bold mono uppercase tracking-wider mb-4">
-            <Shield size={10} /> CEO
+          <div className="absolute -inset-[1px] rounded-[2rem] bg-gradient-to-b from-lime/20 via-transparent to-transparent opacity-60 pointer-events-none" />
+          <div className="absolute -top-16 -right-16 w-44 h-44 bg-lime/20 rounded-full blur-[60px]" />
+          <div className="absolute -bottom-16 -left-16 w-44 h-44 bg-lime/10 rounded-full blur-[60px]" />
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-lime text-black text-[10px] font-bold mono uppercase tracking-wider">
+              <Shield size={10} /> CEO
+            </div>
+            <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-amber-600/20 border border-amber-500/30 text-amber-400 text-[10px] font-bold mono uppercase tracking-wider">
+              <Crown size={10} /> KING
+            </div>
           </div>
           <h3 className="text-xl sm:text-2xl font-bold text-white text-safe">{staff.ceo.name}</h3>
           <p className="text-lime text-sm font-semibold mono uppercase tracking-wider mt-1">{staff.ceo.role}</p>
@@ -54,9 +60,6 @@ export default function CompanyStaff() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="glass glass-hover rounded-[2rem] p-6 sm:p-8 border-lime/20 max-w-sm mx-auto mb-10 text-center overflow-hidden card-safe"
         >
-          <div className="w-14 h-14 rounded-2xl bg-lime/10 flex items-center justify-center mx-auto mb-4">
-            <Crown size={24} className="text-lime" />
-          </div>
           <h3 className="text-xl font-bold text-white text-safe">{staff.viceOwner.name}</h3>
           <p className="text-lime text-sm font-semibold mono uppercase tracking-wider mt-1">{staff.viceOwner.role}</p>
         </motion.div>

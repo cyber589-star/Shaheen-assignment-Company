@@ -242,7 +242,6 @@ export default function PaymentForm({ selectedPackage: initialPkg, onClose }: { 
                   { label: 'Full Name *', name: 'name', type: 'text', placeholder: 'Your full name' },
                   { label: 'WhatsApp Number *', name: 'whatsapp', type: 'tel', placeholder: '03XX XXXXXXX' },
                   { label: 'Email', name: 'email', type: 'email', placeholder: 'your@email.com' },
-                  { label: 'Course / Subject *', name: 'course', type: 'text', placeholder: 'e.g. English, Math' },
                 ].map((f) => (
                   <div key={f.name} className="overflow-hidden">
                     <label className="block text-xs text-white/50 mb-1.5 mono uppercase tracking-wider truncate">{f.label}</label>
@@ -250,6 +249,16 @@ export default function PaymentForm({ selectedPackage: initialPkg, onClose }: { 
                       className="input-glass" placeholder={f.placeholder} />
                   </div>
                 ))}
+                <div className="overflow-hidden">
+                  <label className="block text-xs text-white/50 mb-1.5 mono uppercase tracking-wider truncate">Select Work *</label>
+                  <select name="course" value={form.course} onChange={handleChange} required className="select-glass">
+                    <option value="">Select work type</option>
+                    <option value="Handwriting">Handwriting</option>
+                    <option value="MS Writing">MS Writing</option>
+                    <option value="Assignment">Assignment</option>
+                    <option value="Typing Work">Typing Work</option>
+                  </select>
+                </div>
                 <div className="overflow-hidden">
                   <label className="block text-xs text-white/50 mb-1.5 mono uppercase tracking-wider truncate">Qualification *</label>
                   <select name="qualification" value={form.qualification} onChange={handleChange} required className="select-glass">

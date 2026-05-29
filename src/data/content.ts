@@ -18,7 +18,7 @@ export const companyInfo = {
   owner: 'Malik Mateen',
   ceo: 'Malik Mateen',
   viceOwner: 'Kainat Waseem',
-  officeHours: '9:00 AM to 12:00 AM',
+  officeHours: '9:00 AM to 12:00 PM',
 }
 
 export interface Package {

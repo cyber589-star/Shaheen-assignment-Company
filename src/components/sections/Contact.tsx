@@ -6,7 +6,7 @@ import { Phone, Mail, MapPin, Clock, ExternalLink, Send, MessageCircle } from 'l
 import { companyInfo } from '@/data/content'
 
 const contactItems = [
-  { icon: Phone, label: 'WhatsApp', value: companyInfo.whatsapp, href: `https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}`, color: 'text-lime' },
+  { icon: Phone, label: 'WhatsApp Channel', value: 'Join our WhatsApp Channel', href: 'https://www.whatsapp.com/channel/0029VbCOSaIJ93wT38mvGM0C', color: 'text-lime' },
   { icon: Mail, label: 'Email', value: companyInfo.email, href: `mailto:${companyInfo.email}`, color: 'text-lime' },
   { icon: MapPin, label: 'Location', value: 'Pakistan', href: '#', color: 'text-white/50' },
   { icon: Clock, label: 'Office Hours', value: companyInfo.officeHours, href: '#', color: 'text-white/50' },
@@ -54,14 +54,14 @@ export default function Contact() {
             </motion.a>
           ))}
 
-          <div className="glass rounded-[1.5rem] p-4 sm:p-5 border-white/10 overflow-hidden card-safe">
+          <div className="glass rounded-[1.5rem] p-4 sm:p-5 border-lime/20 overflow-hidden card-safe">
             <h4 className="font-semibold text-lime mb-1 text-xs sm:text-sm text-safe">Need Urgent Help?</h4>
-            <p className="text-white/40 text-xs mb-3 text-safe">Chat directly with our HR team on WhatsApp.</p>
-            <a href={`https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hi! I need assistance.')}`}
+            <p className="text-white/40 text-xs mb-3 text-safe">Join our WhatsApp Channel for instant updates and support.</p>
+            <a href="https://www.whatsapp.com/channel/0029VbCOSaIJ93wT38mvGM0C"
               target="_blank" rel="noopener noreferrer"
               className="btn-lime text-xs px-4 py-2">
               <Send size={12} />
-              Chat on WhatsApp
+              Join WhatsApp Channel
             </a>
           </div>
         </div>
