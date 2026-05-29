@@ -27,6 +27,8 @@ export interface Package {
   subtitle: string
   price: string
   priceValue: number
+  comparePrice: string
+  comparePriceValue: number
   joinFee: string
   dailySalary: string
   pageWrite: string
@@ -43,6 +45,8 @@ export const packages: Package[] = [
     subtitle: 'Starter Package',
     price: 'PKR 1,500',
     priceValue: 1500,
+    comparePrice: 'PKR 2,000',
+    comparePriceValue: 2000,
     joinFee: 'PKR 1,500',
     dailySalary: '400 Direct',
     pageWrite: 'Page Write 02',
@@ -63,6 +67,8 @@ export const packages: Package[] = [
     subtitle: 'Premium Package',
     price: 'PKR 3,000',
     priceValue: 3000,
+    comparePrice: 'PKR 5,000',
+    comparePriceValue: 5000,
     joinFee: 'PKR 3,000',
     dailySalary: '800 Direct',
     pageWrite: 'Page Write 04',

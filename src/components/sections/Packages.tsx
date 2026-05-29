@@ -56,13 +56,20 @@ export default function Packages({ onSelect }: { onSelect?: (pkgId: string) => v
                   <div className="absolute top-0 right-0 w-36 h-36 bg-lime/5 rounded-full blur-3xl pointer-events-none" />
 
                     <div className="text-center mb-3 relative">
-                    <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full mb-2 ${pkg.popular ? 'bg-lime/20' : 'bg-white/5'}`}>
+                    <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full mb-3 ${pkg.popular ? 'bg-lime/20' : 'bg-white/5'}`}>
                       {pkg.popular ? <Zap size={11} className="text-lime shrink-0" /> : <Zap size={11} className="text-white/40 shrink-0" />}
                       <span className={`font-bold text-xs ${pkg.popular ? 'text-lime' : 'text-white/80'}`}>
                         {pkg.name}
                       </span>
                     </div>
-                    <h3 className="text-2xl sm:text-4xl font-bold text-white mb-1 tracking-[-0.04em] text-safe">{pkg.price}</h3>
+                    {/* Modern eCommerce pricing */}
+                    <div className="flex items-baseline justify-center gap-2.5 mb-1">
+                      <span className="text-sm sm:text-lg text-white/30 line-through font-medium">{pkg.comparePrice}</span>
+                      <span className="text-2xl sm:text-4xl font-bold text-lime tracking-[-0.04em] text-safe">{pkg.price}</span>
+                    </div>
+                    <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-400 text-[10px] font-bold mono tracking-wider mb-1">
+                      Save PKR {(pkg.comparePriceValue - pkg.priceValue).toLocaleString()} · {Math.round((1 - pkg.priceValue / pkg.comparePriceValue) * 100)}% OFF
+                    </div>
                     <p className="text-white/40 text-xs text-safe">{pkg.subtitle}</p>
                   </div>
 
