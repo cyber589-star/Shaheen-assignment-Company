@@ -14,7 +14,7 @@ export default function Hero() {
 
   const [count, setCount] = useState(0)
   useEffect(() => {
-    let start = 0, end = 500, dur = 2500
+    let start = 0, end = 2000, dur = 2500
     const inc = end / (dur / 16)
     const t = setInterval(() => {
       start += inc
@@ -62,7 +62,7 @@ export default function Hero() {
                 transition={{ duration: 0.7, delay: 0.2 }}
                 className="text-sm sm:text-base text-white/60 max-w-lg mb-5 sm:mb-8 leading-normal text-safe"
               >
-                Professional academic writing trusted by 500+ students. Expert help with assignments, thesis, and projects — delivered on time.
+                Professional academic writing trusted by 2000+ students. Expert help with assignments, thesis, and projects — delivered on time.
               </motion.p>
 
               <motion.div

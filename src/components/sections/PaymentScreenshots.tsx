@@ -8,9 +8,9 @@ import { companyInfo } from '@/data/content'
 
 const images = [
   { src: '/jjjj.PNG', alt: 'Payment screenshot 1' },
-  { src: '/Capturea.PNG', alt: 'Payment screenshot 2' },
-  { src: '/Capturejj.PNG', alt: 'Payment screenshot 3' },
-  { src: '/Capturejjjjj.PNG', alt: 'Payment screenshot 4' },
+  { src: '/k.PNG', alt: 'Payment screenshot 2' },
+  { src: '/nacl.png', alt: 'Payment screenshot 3' },
+  { src: '/ordo  page  1.PNG', alt: 'Payment screenshot 4' },
 ]
 
 export default function PaymentScreenshots() {
