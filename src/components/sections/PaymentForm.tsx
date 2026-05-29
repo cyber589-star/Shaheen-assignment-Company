@@ -290,12 +290,12 @@ export default function PaymentForm({ selectedPackage: initialPkg, onClose }: { 
                   <input type="tel" name="paymentNumber" value={form.paymentNumber} onChange={handleChange} required className="input-glass" placeholder="Your account number" />
                 </div>
                 <div className="overflow-hidden">
-                  <label className="block text-xs text-white/50 mb-1.5 mono uppercase tracking-wider truncate">Transaction ID *</label>
-                  <input type="text" name="transactionId" value={form.transactionId} onChange={handleChange} required className="input-glass" placeholder="Enter transaction ID" />
+                  <label className="block text-xs text-white/50 mb-1.5 mono uppercase tracking-wider truncate">Transaction ID</label>
+                  <input type="text" name="transactionId" value={form.transactionId} onChange={handleChange} className="input-glass" placeholder="Enter transaction ID (optional)" />
                 </div>
                 <div className="overflow-hidden">
-                  <label className="block text-xs text-white/50 mb-1.5 mono uppercase tracking-wider truncate">Referral Code</label>
-                  <input type="text" name="referralCode" value={form.referralCode} onChange={handleChange} className="input-glass" placeholder="Optional" />
+                  <label className="block text-xs text-white/50 mb-1.5 mono uppercase tracking-wider truncate">Referral Number</label>
+                  <input type="text" name="referralCode" value={form.referralCode} onChange={handleChange} className="input-glass" placeholder="Referral number (optional)" />
                 </div>
                 <div className="overflow-hidden">
                   <label className="block text-xs text-white/50 mb-1.5 mono uppercase tracking-wider truncate">Screenshot</label>

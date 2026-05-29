@@ -55,20 +55,23 @@ export default function Packages({ onSelect }: { onSelect?: (pkgId: string) => v
                 <div className={`rounded-[1.45rem] p-4 sm:p-6 h-full flex flex-col relative overflow-hidden card-safe ${pkg.popular ? 'bg-obsidian-light' : 'bg-obsidian-light'}`}>
                   <div className="absolute top-0 right-0 w-36 h-36 bg-lime/5 rounded-full blur-3xl pointer-events-none" />
 
-                  <div className="text-center mb-3 relative">
+                    <div className="text-center mb-3 relative">
                     <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full mb-2 ${pkg.popular ? 'bg-lime/20' : 'bg-white/5'}`}>
                       {pkg.popular ? <Zap size={11} className="text-lime shrink-0" /> : <Zap size={11} className="text-white/40 shrink-0" />}
                       <span className={`font-bold text-xs ${pkg.popular ? 'text-lime' : 'text-white/80'}`}>
                         {pkg.name}
                       </span>
                     </div>
-                    <h3 className="text-xl sm:text-3xl font-bold text-white mb-1 tracking-[-0.04em] text-safe">{pkg.price}</h3>
-                    <p className="text-white/40 text-xs text-safe">{pkg.subtitle}</p>
+                    <div className="mb-1">
+                      <p className="text-xs sm:text-sm text-white/30 line-through mb-0.5">{pkg.price}</p>
+                      <p className="text-2xl sm:text-4xl font-bold text-lime tracking-[-0.04em] text-safe">{pkg.joinFee}</p>
+                    </div>
+                    <p className="text-white/40 text-[10px] text-safe">Joining Fee • {pkg.subtitle}</p>
                   </div>
 
                   <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-3">
                     <div className="glass rounded-xl p-1.5 sm:p-2.5 text-center overflow-hidden">
-                      <p className="text-[9px] text-white/40 mono uppercase tracking-wider truncate">Join Fee</p>
+                      <p className="text-[9px] text-white/40 mono uppercase tracking-wider truncate">Joining Fee</p>
                       <p className="text-lime font-bold text-xs mt-0.5 truncate">{pkg.joinFee.replace('Join ', '')}</p>
                     </div>
                     <div className="glass rounded-xl p-1.5 sm:p-2.5 text-center overflow-hidden">

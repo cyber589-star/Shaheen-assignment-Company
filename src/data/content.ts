@@ -18,7 +18,7 @@ export const companyInfo = {
   owner: 'Malik Mateen',
   ceo: 'Malik Mateen',
   viceOwner: 'Kainat Waseem',
-  officeHours: '9:00 AM - 9:00 PM (Mon-Sat)',
+  officeHours: '9:00 AM to 12:00 AM',
 }
 
 export interface Package {
@@ -43,15 +43,15 @@ export const packages: Package[] = [
     subtitle: 'Starter Package',
     price: 'PKR 2,000',
     priceValue: 2000,
-    joinFee: 'Join PKR 1,500',
+    joinFee: 'PKR 1,500',
     dailySalary: '400 Direct',
     pageWrite: 'Page Write 02',
     referralsRequired: 8,
     features: [
       'Daily Salary: PKR 400',
       'Page Write: 02 Pages',
-      'Join Fee: PKR 1,500',
-      'Fixed Price: PKR 2,000',
+      'Joining Fee: PKR 1,500',
+      'Compare Price: PKR 2,000',
       'Direct Payment',
       'WhatsApp Support',
       'Basic Assignments',
@@ -65,15 +65,15 @@ export const packages: Package[] = [
     subtitle: 'Premium Package',
     price: 'PKR 5,000',
     priceValue: 5000,
-    joinFee: 'Join Only PKR 3,000',
+    joinFee: 'PKR 3,000',
     dailySalary: '800 Direct',
     pageWrite: 'Page Write 04',
     referralsRequired: 5,
     features: [
       'Daily Salary: PKR 800',
       'Page Write: 04 Pages',
-      'Join Fee: PKR 3,000 Only',
-      'Fixed Price: PKR 5,000',
+      'Joining Fee: PKR 3,000',
+      'Compare Price: PKR 5,000',
       'Direct Payment',
       'Premium Assignments',
       'Priority Support',
@@ -95,7 +95,7 @@ export const services = [
 // Company Staff
 export const staff = {
   ceo: {
-    name: 'Malikmateen',
+    name: 'Malik-Mateen',
     role: 'CEO of Company',
     image: null,
   },

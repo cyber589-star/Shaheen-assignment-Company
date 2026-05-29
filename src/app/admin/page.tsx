@@ -89,7 +89,7 @@ export default function AdminPage() {
     { label: 'Payment Method', value: u.payment_method?.toUpperCase(), icon: DollarSign },
     { label: 'Payment Number', value: u.payment_number, icon: Phone },
     { label: 'Transaction ID', value: u.transaction_id, icon: Hash },
-    { label: 'Referral Code', value: u.referral_code || '—', icon: ExternalLink },
+    { label: 'Referral Number', value: u.referral_code || '—', icon: ExternalLink },
     { label: 'Notes', value: u.notes || '—', icon: FileText },
     { label: 'Registered', value: formatDate(u.created_at), icon: Clock },
   ]
