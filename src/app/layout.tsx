@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: 'Shaheen Assignment Company - Premium Assignment Services',
   description: 'Professional assignment writing and academic services trusted by hundreds of students across Pakistan.',
   keywords: 'assignment, writing, services, Pakistan',
+  icons: {
+    icon: '/zkzb.PNG',
+    apple: '/zkzb.PNG',
+  },
   openGraph: {
     title: 'Shaheen Assignment Company',
     description: 'Premium Assignment Services',

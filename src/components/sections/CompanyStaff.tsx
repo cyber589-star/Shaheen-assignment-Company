@@ -36,16 +36,18 @@ export default function CompanyStaff() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: 0.05 }}
-          className="glass rounded-[2rem] p-6 sm:p-8 border-lime/40 max-w-sm mx-auto mb-8 text-center relative overflow-hidden card-safe shadow-[0_0_60px_-12px_rgba(204,255,0,0.15)]"
+          className="glass rounded-[2rem] p-7 sm:p-9 border-lime/40 max-w-sm mx-auto mb-8 text-center relative overflow-hidden card-safe shadow-[0_0_80px_-8px_rgba(204,255,0,0.2)]"
         >
+          {/* Top accent glow line */}
+          <div className="absolute top-0 left-12 right-12 h-[2px] bg-gradient-to-r from-transparent via-lime to-transparent opacity-80" />
           <div className="absolute -inset-[1px] rounded-[2rem] bg-gradient-to-b from-lime/20 via-transparent to-transparent opacity-60 pointer-events-none" />
-          <div className="absolute -top-16 -right-16 w-44 h-44 bg-lime/20 rounded-full blur-[60px]" />
-          <div className="absolute -bottom-16 -left-16 w-44 h-44 bg-lime/10 rounded-full blur-[60px]" />
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-lime text-black text-[10px] font-bold mono uppercase tracking-wider">
+          <div className="absolute -top-20 -right-20 w-52 h-52 bg-lime/20 rounded-full blur-[80px]" />
+          <div className="absolute -bottom-20 -left-20 w-52 h-52 bg-lime/10 rounded-full blur-[80px]" />
+          <div className="flex items-center justify-center gap-2.5 mb-4">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-lime text-black text-[10px] font-bold mono uppercase tracking-wider shadow-lg shadow-lime/20">
               <Shield size={10} /> CEO
             </div>
-            <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-amber-600/20 border border-amber-500/30 text-amber-400 text-[10px] font-bold mono uppercase tracking-wider">
+            <div className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 to-amber-600/20 border border-amber-500/30 text-amber-400 text-[10px] font-bold mono uppercase tracking-wider shadow-lg shadow-amber-500/10">
               <Crown size={10} /> KING
             </div>
           </div>
