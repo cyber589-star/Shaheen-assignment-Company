@@ -60,7 +60,7 @@ export default function PaymentForm({ selectedPackage: initialPkg, onClose }: { 
         }
       }
       setSubmitted(true)
-      toast.success('Registration successful!')
+      toast('Registration Pending', { duration: Infinity, style: { background: '#1a1a1a', color: '#fbbf24', border: '1px solid rgba(251,191,36,0.3)', borderRadius: '1rem', fontSize: '14px', fontWeight: 600 } })
       setTimeout(() => {
         document.getElementById('referral')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }, 500)
