@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Upload, CheckCircle, Copy, ExternalLink, Banknote } from 'lucide-react'
+import { Upload, Clock, Copy, ExternalLink, Banknote } from 'lucide-react'
 import { companyInfo, packages } from '@/data/content'
 import { addUser, generateReferralCode, uploadScreenshot, updateUser } from '@/lib/supabase'
 import toast from 'react-hot-toast'
@@ -80,60 +80,43 @@ export default function PaymentForm({ selectedPackage: initialPkg, onClose }: { 
   }
 
   if (submitted) {
-    const referralText = form.package === 'small'
-      ? 'Invite 8 persons to unlock work access.'
-      : 'Invite 5 persons to unlock work access.'
-
     return (
       <section id="referral" className="section-padding relative">
         <div className="max-w-2xl mx-auto px-4" ref={ref}>
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
             transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-lime/20 flex items-center justify-center mx-auto mb-5">
-            <CheckCircle size={36} className="text-lime shrink-0" />
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-amber-500/20 flex items-center justify-center mx-auto mb-5">
+            <Clock size={36} className="text-amber-400 shrink-0" />
           </motion.div>
           <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="text-2xl sm:text-3xl font-bold text-white mb-3 text-center text-safe" style={{ letterSpacing: '-0.04em' }}>Registration Successful!</motion.h2>
+            className="text-2xl sm:text-3xl font-bold text-white mb-3 text-center text-safe" style={{ letterSpacing: '-0.04em' }}>Registration Pending</motion.h2>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
             className="text-white/50 text-sm sm:text-base mb-6 text-center max-w-lg mx-auto text-safe">
             <p>Your registration and payment have been submitted successfully.</p>
-            <p className="mt-2">Admin will review and approve your form within 24 hours.</p>
-            <p className="mt-2">For referral details and work updates, contact HR Team.</p>
+            <p className="mt-2">Admin will approve your payment and registration within 12 hours.</p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-            className="glass rounded-2xl p-5 sm:p-6 mb-6 text-center border border-lime/10 overflow-hidden card-safe">
-            <p className="text-lime font-semibold text-base sm:text-lg text-safe">{referralText}</p>
+            className="glass rounded-2xl p-5 sm:p-6 mb-6 text-center border border-amber-500/20 bg-amber-500/5 overflow-hidden card-safe">
+            <p className="text-amber-400 font-semibold text-sm sm:text-base text-safe">⚠️ Contact your Appliner for Getting Work</p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
-            className="glass rounded-[2.5rem] p-6 sm:p-8 border border-lime/10 overflow-hidden card-safe">
+            className="glass rounded-[2.5rem] p-6 sm:p-8 border border-lime/20 overflow-hidden card-safe">
             <div className="text-center mb-5">
-              <h3 className="text-xl sm:text-2xl font-bold text-white text-safe" style={{ letterSpacing: '-0.04em' }}>HR Team Contact</h3>
-              <p className="text-white/40 text-sm mt-1 text-safe">WhatsApp support for referrals and work updates</p>
+              <h3 className="text-xl sm:text-2xl font-bold text-white text-safe" style={{ letterSpacing: '-0.04em' }}>Join WhatsApp Channel</h3>
+              <p className="text-white/40 text-sm mt-1 text-safe">Get updates, work notifications, and support.</p>
             </div>
-            <div className="space-y-4">
-              <div className="glass rounded-2xl p-4 sm:p-5 flex items-center justify-between overflow-hidden card-safe">
-                <div>
-                  <p className="text-xs text-white/40 mono mb-1">WhatsApp Number</p>
-                  <p className="text-white font-semibold text-base sm:text-lg text-safe">+92 312 8268793</p>
-                </div>
-                <a href={`https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hi! I have completed registration. Please guide me further.')}`}
-                  target="_blank" rel="noopener noreferrer"
-                  className="btn-lime text-xs sm:text-sm px-4 py-2.5 whitespace-nowrap shrink-0">
-                  WhatsApp <ExternalLink size={13} className="inline shrink-0" />
-                </a>
+            <div className="glass rounded-2xl p-4 sm:p-5 flex items-center justify-between overflow-hidden card-safe border-lime/20">
+              <div>
+                <p className="text-xs text-white/40 mono mb-1">WhatsApp Channel</p>
+                <p className="text-white font-semibold text-sm sm:text-base text-safe">Shaheen Assignments Channel</p>
               </div>
-              <div className="grid sm:grid-cols-2 gap-3">
-                <div className="glass rounded-xl p-4 text-center overflow-hidden card-safe">
-                  <p className="text-white/40 text-xs mono mb-1">Referral Help</p>
-                  <p className="text-white text-sm text-safe">Get referral support from HR</p>
-                </div>
-                <div className="glass rounded-xl p-4 text-center overflow-hidden card-safe">
-                  <p className="text-white/40 text-xs mono mb-1">Work Support</p>
-                  <p className="text-white text-sm text-safe">Daily work updates & guidance</p>
-                </div>
-              </div>
+              <a href="https://www.whatsapp.com/channel/0029VbCOSaIJ93wT38mvGM0C"
+                target="_blank" rel="noopener noreferrer"
+                className="btn-lime text-xs sm:text-sm px-4 py-2.5 whitespace-nowrap shrink-0">
+                Join Now <ExternalLink size={13} className="inline shrink-0" />
+              </a>
             </div>
           </motion.div>
         </div>
