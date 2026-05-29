@@ -6,13 +6,21 @@ export const metadata: Metadata = {
   description: 'Professional assignment writing and academic services trusted by hundreds of students across Pakistan.',
   keywords: 'assignment, writing, services, Pakistan',
   icons: {
-    icon: '/zkzb.PNG',
+    icon: [{ url: '/zkzb.PNG', type: 'image/png' }],
     apple: '/zkzb.PNG',
   },
   openGraph: {
-    title: 'Shaheen Assignment Company',
-    description: 'Premium Assignment Services',
+    title: 'Shaheen Assignments Limited',
+    description: 'Professional assignment writing and academic services trusted by hundreds of students across Pakistan.',
     type: 'website',
+    siteName: 'Shaheen Assignments Limited',
+    images: [{ url: '/zkzb.PNG', width: 512, height: 512 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Shaheen Assignments Limited',
+    description: 'Professional assignment writing and academic services trusted by hundreds of students across Pakistan.',
+    images: ['/zkzb.PNG'],
   },
 }
 
