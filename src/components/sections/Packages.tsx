@@ -62,17 +62,14 @@ export default function Packages({ onSelect }: { onSelect?: (pkgId: string) => v
                         {pkg.name}
                       </span>
                     </div>
-                    <div className="mb-1">
-                      <p className="text-xs sm:text-sm text-white/30 line-through mb-0.5">{pkg.price}</p>
-                      <p className="text-2xl sm:text-4xl font-bold text-lime tracking-[-0.04em] text-safe">{pkg.joinFee}</p>
-                    </div>
-                    <p className="text-white/40 text-[10px] text-safe">Joining Fee • {pkg.subtitle}</p>
+                    <h3 className="text-2xl sm:text-4xl font-bold text-white mb-1 tracking-[-0.04em] text-safe">{pkg.price}</h3>
+                    <p className="text-white/40 text-xs text-safe">{pkg.subtitle}</p>
                   </div>
 
                   <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-3">
                     <div className="glass rounded-xl p-1.5 sm:p-2.5 text-center overflow-hidden">
-                      <p className="text-[9px] text-white/40 mono uppercase tracking-wider truncate">Joining Fee</p>
-                      <p className="text-lime font-bold text-xs mt-0.5 truncate">{pkg.joinFee.replace('Join ', '')}</p>
+                      <p className="text-[9px] text-white/40 mono uppercase tracking-wider truncate">Price</p>
+                      <p className="text-lime font-bold text-xs mt-0.5 truncate">{pkg.price}</p>
                     </div>
                     <div className="glass rounded-xl p-1.5 sm:p-2.5 text-center overflow-hidden">
                       <p className="text-[9px] text-white/40 mono uppercase tracking-wider truncate">Daily</p>

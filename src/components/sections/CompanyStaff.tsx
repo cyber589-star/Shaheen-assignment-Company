@@ -47,12 +47,10 @@ export default function CompanyStaff() {
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-lime text-black text-[10px] font-bold mono uppercase tracking-wider shadow-lg shadow-lime/20 mb-5">
             <Shield size={10} /> CEO
           </div>
-          {/* Name + KING badge inline */}
-          <div className="flex items-center justify-center gap-3 mb-1">
+          {/* Name + premium icon */}
+          <div className="flex items-center justify-center gap-2.5 mb-1">
             <h3 className="text-xl sm:text-2xl font-bold text-white text-safe tracking-[-0.02em]">{staff.ceo.name}</h3>
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 via-amber-400/15 to-amber-600/20 border border-amber-400/40 text-amber-300 text-[12px] font-bold mono uppercase tracking-wider shadow-lg shadow-amber-500/15">
-              <Crown size={13} className="text-amber-400" /> KING
-            </div>
+            <Crown size={18} className="text-amber-400 shrink-0" />
           </div>
           <p className="text-lime text-sm font-semibold mono uppercase tracking-wider mt-1">{staff.ceo.role}</p>
         </motion.div>
