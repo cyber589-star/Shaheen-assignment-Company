@@ -41,7 +41,7 @@ export default function Hero() {
                 className="flex items-center gap-3 mb-6 sm:mb-8"
               >
                 <span className="status-dot" />
-                <span className="mono text-[10px] text-white/40 tracking-[0.2em] uppercase truncate">AI-Powered Assignment Service</span>
+                <span className="mono text-[10px] text-white/40 tracking-[0.2em] uppercase truncate">Trusted International Company</span>
               </motion.div>
 
               <motion.h1
@@ -50,20 +50,27 @@ export default function Hero() {
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className="text-3xl sm:text-5xl lg:text-[6rem] font-bold text-white leading-[0.85] tracking-[-0.06em] mb-4 sm:mb-6 text-safe"
               >
-                Shaheen{' '}
-                <span className="gradient-text italic">Assignment</span>
+                Trusted{' '}
+                <span className="gradient-text">International</span>
                 <br />
-                Services
+                Company
               </motion.h1>
 
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="text-sm sm:text-base text-white/60 max-w-lg mb-5 sm:mb-8 leading-normal text-safe"
+                className="mb-5 sm:mb-8 space-y-2"
               >
-                Professional academic writing trusted by 2000+ students. Expert help with assignments, thesis, and projects — delivered on time.
-              </motion.p>
+                <p className="flex items-start gap-2 text-sm sm:text-base text-white/60 text-safe">
+                  <span className="text-red-500 shrink-0 mt-0.5">🔴</span>
+                  Blockchain Company
+                </p>
+                <p className="flex items-start gap-2 text-sm sm:text-base text-white/60 text-safe">
+                  <span className="text-red-500 shrink-0 mt-0.5">🔴</span>
+                  This is a five-year-old company and will continue to operate for the rest of its life because it is blockchain-based
+                </p>
+              </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -74,9 +81,9 @@ export default function Hero() {
                 <a href="#packages" className="btn-lime text-xs sm:text-base px-4 sm:px-6 py-2 sm:py-3">
                   Get Started <ArrowRight size={13} />
                 </a>
-                <a href="https://wa.me/923128268793" target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/923420423970" target="_blank" rel="noopener noreferrer"
                   className="btn-lime-outline text-xs sm:text-base px-4 sm:px-6 py-2 sm:py-3">
-                  Chat with HR
+                  Talk to CEO
                 </a>
               </motion.div>
 
