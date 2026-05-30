@@ -41,7 +41,7 @@ export default function Hero() {
                 className="flex items-center gap-3 mb-6 sm:mb-8"
               >
                 <span className="status-dot" />
-                <span className="mono text-[10px] text-white/40 tracking-[0.2em] uppercase truncate">Trusted International Company</span>
+                <span className="mono text-[10px] text-white/40 tracking-[0.2em] uppercase truncate">Shaheen Assignment Company</span>
               </motion.div>
 
               <motion.h1
@@ -50,8 +50,8 @@ export default function Hero() {
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className="text-3xl sm:text-5xl lg:text-[6rem] font-bold text-white leading-[0.85] tracking-[-0.06em] mb-4 sm:mb-6 text-safe"
               >
-                Trusted{' '}
-                <span className="gradient-text">International</span>
+                Shaheen{' '}
+                <span className="gradient-text">Assignment</span>
                 <br />
                 Company
               </motion.h1>
