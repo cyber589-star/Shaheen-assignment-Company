@@ -81,9 +81,9 @@ export default function Hero() {
                 <a href="#packages" className="btn-lime text-xs sm:text-base px-4 sm:px-6 py-2 sm:py-3">
                   Get Started <ArrowRight size={13} />
                 </a>
-                <a href="https://wa.me/923420423970" target="_blank" rel="noopener noreferrer"
+                <a href="https://whatsapp.com/channel/0029VbCOSaIJ93wT38mvGM0C" target="_blank" rel="noopener noreferrer"
                   className="btn-lime-outline text-xs sm:text-base px-4 sm:px-6 py-2 sm:py-3">
-                  Talk to CEO
+                  Join Our WhatsApp Channel
                 </a>
               </motion.div>
 
