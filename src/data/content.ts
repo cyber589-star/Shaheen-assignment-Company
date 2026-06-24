@@ -161,10 +161,10 @@ export const staff = {
     { name: 'Sania Gafoor', role: 'Senior Appliner' },
     { name: 'Alia Waheed', role: 'Senior Appliner' },
     { name: 'Mishal Malik', role: 'Senior Appliner' },
-    { name: 'Ayesha Arif', role: 'Senior Appliner' },
+    { name: 'Fizza Sami', role: 'Senior Appliner' },
     { name: 'Abeera Safdar', role: 'Senior Appliner' },
     { name: 'Muskan Malik', role: 'Senior Appliner' },
-    { name: 'Maryam Younas', role: 'Senior Appliner' },
+    { name: 'Zarish Hayyat', role: 'Senior Appliner' },
     { name: 'Muqadas Quyyum', role: 'Senior Appliner' },
   ],
 }
