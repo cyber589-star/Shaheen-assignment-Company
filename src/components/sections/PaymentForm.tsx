@@ -177,18 +177,18 @@ export default function PaymentForm({ selectedPackage: initialPkg, onClose }: { 
                   </button>
                 </div>
                 <div className="glass rounded-2xl p-4 sm:p-5 border-white/10 relative overflow-hidden card-safe">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full blur-2xl pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-lime/5 rounded-full blur-2xl pointer-events-none" />
                   <div className="flex items-center justify-between mb-2 overflow-hidden">
-                    <span className="text-sm font-semibold text-white flex items-center gap-1.5 text-safe">
-                      <span className="w-2 h-2 rounded-full bg-white/50 shrink-0" />
+                    <span className="text-sm font-semibold text-lime flex items-center gap-1.5 text-safe">
+                      <span className="w-2 h-2 rounded-full bg-lime shrink-0" />
                       JazzCash
                     </span>
-                    <span className="text-[10px] bg-white/5 text-white/50 px-2 py-1 rounded-full mono uppercase whitespace-nowrap shrink-0">Active</span>
+                    <span className="text-[10px] bg-lime/10 text-lime px-2 py-1 rounded-full mono uppercase whitespace-nowrap shrink-0">Active</span>
                   </div>
                   <p className="font-bold text-white text-lg sm:text-xl text-safe break-all">{companyInfo.jazzcash.number}</p>
                   <p className="text-white/50 text-sm mt-0.5 text-safe">Name: {companyInfo.jazzcash.name}</p>
                   <button onClick={() => copyNumber(companyInfo.jazzcash.number)}
-                    className="mt-3 flex items-center gap-1.5 text-white/60 text-xs hover:text-lime transition-colors bg-white/5 px-3 py-1.5 rounded-xl mono">
+                    className="mt-3 flex items-center gap-1.5 text-lime text-xs hover:text-lime-dark transition-colors bg-white/5 px-3 py-1.5 rounded-xl mono">
                     <Copy size={11} /> Copy Number
                   </button>
                 </div>
