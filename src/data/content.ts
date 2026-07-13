@@ -12,8 +12,8 @@ export const companyInfo = {
     number: '03420423970',
   },
   jazzcash: {
-    name: 'Kainat Waseem',
-    number: '0355 6011189',
+    name: 'Mateen Ahmad',
+    number: '03420423970',
   },
   owner: 'Malik Mateen',
   ceo: 'Malik Mateen',
@@ -188,7 +188,7 @@ export const faqs = [
   },
   {
     question: 'What payment methods do you accept?',
-    answer: 'We accept EasyPaisa (03420423970 - Ansha Gull) and JazzCash (0355 6011189 - Kainat Waseem).',
+    answer: 'We accept EasyPaisa (03420423970 - Ansha Gull) and JazzCash (03420423970 - Mateen Ahmad).',
   },
   {
     question: 'How long does delivery take?',
