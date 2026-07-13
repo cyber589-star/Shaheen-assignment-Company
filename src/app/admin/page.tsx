@@ -407,7 +407,7 @@ export default function AdminPage() {
                 <p className="text-white/40 text-sm mt-0.5">{companyInfo.easypaisa.name}</p>
               </div>
               <div className="glass rounded-xl p-5 border-white/10">
-                <p className="text-white/60 font-bold text-xs mono mb-2">JAZZCASH</p>
+                <p className="text-lime font-bold text-xs mono mb-2">JAZZCASH</p>
                 <p className="text-xl font-bold text-white">{companyInfo.jazzcash.number}</p>
                 <p className="text-white/40 text-sm mt-0.5">{companyInfo.jazzcash.name}</p>
               </div>
