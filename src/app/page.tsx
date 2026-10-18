@@ -14,6 +14,7 @@ import Packages from '@/components/sections/Packages'
 import PaymentForm from '@/components/sections/PaymentForm'
 import FAQ from '@/components/sections/FAQ'
 import Contact from '@/components/sections/Contact'
+import Disclaimer from '@/components/Disclaimer'
 import { checkTables } from '@/lib/supabase'
 
 export default function Home() {
@@ -53,6 +54,7 @@ export default function Home() {
         {selectedPackage && <PaymentForm key={selectedPackage} selectedPackage={selectedPackage} />}
         <FAQ />
         <Contact />
+        <Disclaimer />
         <Footer />
         <BottomNav />
         <WhatsAppButton />
