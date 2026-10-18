@@ -52,7 +52,7 @@ export default function AdminPage() {
       refreshSiteSettings() // live-update the whole website instantly
       alert('Settings saved! Website now shows the new numbers.')
     } catch (e: any) {
-      alert('Save failed: ' + (e?.message || 'unknown error'))
+      alert('Could not save on this server (it is read-only, e.g. Vercel).\n\nTo change settings: edit the file src/data/site-settings.json on GitHub and the site will update automatically after redeploy.\n\n(Local server / npm run dev: saving works normally.)')
     }
     setSavingSettings(false)
   }
@@ -481,7 +481,11 @@ export default function AdminPage() {
         {activeTab === 'settings' && (
           <div className="glass rounded-[2rem] p-6 border-white/10 max-w-2xl">
             <h2 className="font-bold text-white mb-1">Website Settings</h2>
-            <p className="text-white/40 text-xs mono mb-6">Changes appear on the website instantly after saving.</p>
+            <p className="text-white/40 text-xs mono mb-6">Saved to the single file: src/data/site-settings.json</p>
+            <details className="glass rounded-2xl p-4 border-white/10 mb-6">
+              <summary className="text-xs text-white/50 mono uppercase tracking-wider cursor-pointer hover:text-lime">View current JSON</summary>
+              <pre className="mt-3 text-[11px] text-lime/80 overflow-x-auto whitespace-pre-wrap break-all">{JSON.stringify(settings, null, 2)}</pre>
+            </details>
 
             <div className="space-y-6">
               {/* EasyPaisa */}
