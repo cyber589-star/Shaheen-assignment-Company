@@ -529,6 +529,28 @@ export default function AdminPage() {
                 </div>
               </div>
 
+              {/* Team */}
+              <div className="glass rounded-2xl p-5 border-white/10">
+                <p className="text-lime font-bold text-xs mono mb-4">TEAM (CEO, VICE OWNER, APPLINERS)</p>
+                <div className="grid sm:grid-cols-2 gap-3 mb-4">
+                  <div>
+                    <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">CEO Name</label>
+                    <input type="text" value={settings.ceo_name} onChange={(e) => setField('ceo_name', e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">Vice Owner Name</label>
+                    <input type="text" value={settings.vice_owner_name} onChange={(e) => setField('vice_owner_name', e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
+                  </div>
+                </div>
+                <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">Senior Appliners (one per line)</label>
+                <textarea rows={6} value={settings.senior_appliners.split(',').map((n) => n.trim()).join('\n')}
+                  onChange={(e) => setField('senior_appliners', e.target.value.split('\n').map((n) => n.trim()).filter(Boolean).join(', '))}
+                  className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all resize-none"
+                  placeholder={'Sania Gafoor\nAlia Waheed'} />
+              </div>
+
               <div className="flex items-center gap-3 flex-wrap">
                 <button onClick={handleSaveSettings} disabled={savingSettings}
                   className="btn-lime flex items-center gap-2 text-sm py-3 px-6 disabled:opacity-40">

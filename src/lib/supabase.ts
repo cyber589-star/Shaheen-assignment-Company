@@ -208,6 +208,9 @@ export interface SiteSettings {
   jazzcash_number: string
   jazzcash_name: string
   appliner_whatsapp: string
+  ceo_name: string
+  vice_owner_name: string
+  senior_appliners: string // comma-separated names
 }
 
 export const defaultSettings: SiteSettings = {
@@ -216,6 +219,9 @@ export const defaultSettings: SiteSettings = {
   jazzcash_number: '03420423970',
   jazzcash_name: 'Mateen Ahmad',
   appliner_whatsapp: '+923128268793',
+  ceo_name: 'Malik-Mateen',
+  vice_owner_name: 'Kainat Waseem',
+  senior_appliners: 'Sania Gafoor, Alia Waheed, Mishal Malik, Fizza Sami, Abeera Safdar, Muskan Malik, Zarish Hayyat, Muqadas Quyyum',
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -232,6 +238,9 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     jazzcash_number: map.jazzcash_number || defaultSettings.jazzcash_number,
     jazzcash_name: map.jazzcash_name || defaultSettings.jazzcash_name,
     appliner_whatsapp: map.appliner_whatsapp || defaultSettings.appliner_whatsapp,
+    ceo_name: map.ceo_name || defaultSettings.ceo_name,
+    vice_owner_name: map.vice_owner_name || defaultSettings.vice_owner_name,
+    senior_appliners: map.senior_appliners || defaultSettings.senior_appliners,
   }
 }
 

@@ -115,3 +115,9 @@ DROP POLICY IF EXISTS "anon_insert_settings" ON settings;
 CREATE POLICY "anon_insert_settings" ON settings FOR INSERT TO anon WITH CHECK (true);
 DROP POLICY IF EXISTS "anon_update_settings" ON settings;
 CREATE POLICY "anon_update_settings" ON settings FOR UPDATE TO anon USING (true);
+
+INSERT INTO settings (key, value) VALUES
+  ('ceo_name', 'Malik-Mateen'),
+  ('vice_owner_name', 'Kainat Waseem'),
+  ('senior_appliners', 'Sania Gafoor, Alia Waheed, Mishal Malik, Fizza Sami, Abeera Safdar, Muskan Malik, Zarish Hayyat, Muqadas Quyyum')
+ON CONFLICT (key) DO NOTHING;
