@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Shield, Users, CheckCircle, XCircle, Trash2, Eye, EyeOff, LogOut, RefreshCw, Search, BarChart3, DollarSign, FileText, TrendingUp, Clock, ChevronDown, ExternalLink, ImageIcon, Phone, Mail, BookOpen, CreditCard, Hash, FileInput, User } from 'lucide-react'
-import { getUsers, getAnalytics, updateUser, deleteUser, adminLogin, checkTables } from '@/lib/supabase'
+import { Shield, Users, CheckCircle, XCircle, Trash2, Eye, EyeOff, LogOut, RefreshCw, Search, BarChart3, DollarSign, FileText, TrendingUp, Clock, ChevronDown, ExternalLink, ImageIcon, Phone, Mail, BookOpen, CreditCard, Hash, FileInput, User, Settings, Save } from 'lucide-react'
+import { getUsers, getAnalytics, updateUser, deleteUser, adminLogin, checkTables, getSiteSettings, saveSiteSettings, defaultSettings, type SiteSettings } from '@/lib/supabase'
+import { refreshSiteSettings } from '@/lib/useSiteSettings'
 import { companyInfo } from '@/data/content'
 import Image from 'next/image'
 
@@ -19,6 +20,8 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false)
   const [expandedId, setExpandedId] = useState<string | null>(null)
   const [enlargeImg, setEnlargeImg] = useState<string | null>(null)
+  const [settings, setSettings] = useState<SiteSettings>(defaultSettings)
+  const [savingSettings, setSavingSettings] = useState(false)
 
   const handleLogin = () => {
     if (!password) return
@@ -32,14 +35,29 @@ export default function AdminPage() {
   const loadData = async () => {
     setLoading(true)
     try {
-      const [a, u] = await Promise.all([getAnalytics(), getUsers()])
+      const [a, u, s] = await Promise.all([getAnalytics(), getUsers(), getSiteSettings()])
       setAnalytics(a)
       setUsers(u || [])
+      setSettings(s)
     } catch (e: any) {
       console.error('Admin load error:', e?.message || JSON.stringify(e))
     }
     setLoading(false)
   }
+
+  const handleSaveSettings = async () => {
+    setSavingSettings(true)
+    try {
+      await saveSiteSettings(settings)
+      refreshSiteSettings() // live-update the whole website instantly
+      alert('Settings saved! Website now shows the new numbers.')
+    } catch (e: any) {
+      alert('Save failed: ' + (e?.message || 'unknown error') + '\n\nIf the "settings" table is missing, run the SQL at the bottom of supabase-setup.sql in Supabase SQL Editor.')
+    }
+    setSavingSettings(false)
+  }
+
+  const setField = (key: keyof SiteSettings, value: string) => setSettings((s) => ({ ...s, [key]: value }))
 
   useEffect(() => {
     checkTables()
@@ -69,6 +87,7 @@ export default function AdminPage() {
     { id: 'users', label: 'Users', icon: Users },
     { id: 'payments', label: 'Payments', icon: DollarSign },
     { id: 'orders', label: 'Orders', icon: FileText },
+    { id: 'settings', label: 'Settings', icon: Settings },
   ]
 
   const formatDate = (d: string) => {
@@ -403,13 +422,17 @@ export default function AdminPage() {
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
               <div className="glass rounded-xl p-5 border-white/10">
                 <p className="text-lime font-bold text-xs mono mb-2">EASYPAISA</p>
-                <p className="text-xl font-bold text-white">{companyInfo.easypaisa.number}</p>
-                <p className="text-white/40 text-sm mt-0.5">{companyInfo.easypaisa.name}</p>
+                <p className="text-xl font-bold text-white">{settings.easypaisa_number}</p>
+                <p className="text-white/40 text-sm mt-0.5">{settings.easypaisa_name}</p>
               </div>
               <div className="glass rounded-xl p-5 border-white/10">
                 <p className="text-lime font-bold text-xs mono mb-2">JAZZCASH</p>
-                <p className="text-xl font-bold text-white">{companyInfo.jazzcash.number}</p>
-                <p className="text-white/40 text-sm mt-0.5">{companyInfo.jazzcash.name}</p>
+                <p className="text-xl font-bold text-white">{settings.jazzcash_number}</p>
+                <p className="text-white/40 text-sm mt-0.5">{settings.jazzcash_name}</p>
+              </div>
+              <div className="glass rounded-xl p-5 border-white/10 sm:col-span-2">
+                <p className="text-lime font-bold text-xs mono mb-2">APPLIER / SUPPORT WHATSAPP</p>
+                <p className="text-xl font-bold text-white">{settings.appliner_whatsapp}</p>
               </div>
             </div>
             <div className="glass rounded-xl p-5 border-white/5 text-center">
@@ -450,6 +473,76 @@ export default function AdminPage() {
                   </div>
                 ))}
                 {users.length === 0 && <p className="text-white/20 text-xs text-center py-4">No activity yet</p>}
+              </div>
+            </div>
+          </div>
+        )}
+        {/* Settings */}
+        {activeTab === 'settings' && (
+          <div className="glass rounded-[2rem] p-6 border-white/10 max-w-2xl">
+            <h2 className="font-bold text-white mb-1">Website Settings</h2>
+            <p className="text-white/40 text-xs mono mb-6">Changes appear on the website instantly after saving.</p>
+
+            <div className="space-y-6">
+              {/* EasyPaisa */}
+              <div className="glass rounded-2xl p-5 border-white/10">
+                <p className="text-lime font-bold text-xs mono mb-4">EASYPAISA</p>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">Account Number</label>
+                    <input type="text" value={settings.easypaisa_number} onChange={(e) => setField('easypaisa_number', e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">Account Name</label>
+                    <input type="text" value={settings.easypaisa_name} onChange={(e) => setField('easypaisa_name', e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
+                  </div>
+                </div>
+              </div>
+
+              {/* JazzCash */}
+              <div className="glass rounded-2xl p-5 border-white/10">
+                <p className="text-lime font-bold text-xs mono mb-4">JAZZCASH</p>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">Account Number</label>
+                    <input type="text" value={settings.jazzcash_number} onChange={(e) => setField('jazzcash_number', e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">Account Name</label>
+                    <input type="text" value={settings.jazzcash_name} onChange={(e) => setField('jazzcash_name', e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Applier / Support WhatsApp */}
+              <div className="glass rounded-2xl p-5 border-white/10">
+                <p className="text-lime font-bold text-xs mono mb-4">APPLIER / SUPPORT WHATSAPP</p>
+                <div>
+                  <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">WhatsApp Number</label>
+                  <input type="text" value={settings.appliner_whatsapp} onChange={(e) => setField('appliner_whatsapp', e.target.value)}
+                    placeholder="+92 3XX XXXXXXX"
+                    className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 flex-wrap">
+                <button onClick={handleSaveSettings} disabled={savingSettings}
+                  className="btn-lime flex items-center gap-2 text-sm py-3 px-6 disabled:opacity-40">
+                  {savingSettings ? (
+                    <>
+                      <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" /></svg>
+                      Saving...
+                    </>
+                  ) : (<><Save size={14} /> Save Settings</>)}
+                </button>
+                <button onClick={() => setSettings(defaultSettings)}
+                  className="px-4 py-3 rounded-xl glass text-white/40 text-sm hover:text-white transition-all">
+                  Reset to Current Defaults
+                </button>
               </div>
             </div>
           </div>

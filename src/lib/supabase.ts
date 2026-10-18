@@ -200,3 +200,44 @@ export async function checkTables(): Promise<{ ok: boolean; missing: string[] }>
 export function adminLogin(password: string): boolean {
   return password === 'shaheen2024'
 }
+
+// ===== Site Settings (admin-editable payment numbers) =====
+export interface SiteSettings {
+  easypaisa_number: string
+  easypaisa_name: string
+  jazzcash_number: string
+  jazzcash_name: string
+  appliner_whatsapp: string
+}
+
+export const defaultSettings: SiteSettings = {
+  easypaisa_number: '03420423970',
+  easypaisa_name: 'Ansha Gull',
+  jazzcash_number: '03420423970',
+  jazzcash_name: 'Mateen Ahmad',
+  appliner_whatsapp: '+923128268793',
+}
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  const { data, error } = await supabase.from('settings').select('key, value')
+  if (error || !data) {
+    if (error) console.warn('getSiteSettings error:', error.message)
+    return { ...defaultSettings }
+  }
+  const map: Record<string, string> = {}
+  data.forEach((r: any) => { map[r.key] = r.value })
+  return {
+    easypaisa_number: map.easypaisa_number || defaultSettings.easypaisa_number,
+    easypaisa_name: map.easypaisa_name || defaultSettings.easypaisa_name,
+    jazzcash_number: map.jazzcash_number || defaultSettings.jazzcash_number,
+    jazzcash_name: map.jazzcash_name || defaultSettings.jazzcash_name,
+    appliner_whatsapp: map.appliner_whatsapp || defaultSettings.appliner_whatsapp,
+  }
+}
+
+export async function saveSiteSettings(s: SiteSettings) {
+  const rows = Object.entries(s).map(([key, value]) => ({ key, value: String(value ?? '').trim() }))
+  const { error } = await supabase.from('settings').upsert(rows, { onConflict: 'key' })
+  if (error) throw error
+  return true
+}
