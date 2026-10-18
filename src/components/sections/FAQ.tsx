@@ -4,22 +4,11 @@ import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { ChevronDown, HelpCircle } from 'lucide-react'
 import { faqs } from '@/data/content'
-import { useSiteSettings } from '@/lib/useSiteSettings'
 
 export default function FAQ() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
   const [openIdx, setOpenIdx] = useState<number | null>(null)
-  const settings = useSiteSettings()
-
-  // Replace hardcoded numbers with live settings
-  const liveFaqs = faqs.map((f) => ({
-    ...f,
-    answer: f.answer
-      .replace(/03420423970 - Ansha Gull/g, `${settings.easypaisa_number} - ${settings.easypaisa_name}`)
-      .replace(/03420423970 - Mateen Ahmad/g, `${settings.jazzcash_number} - ${settings.jazzcash_name}`)
-      .replace(/\+92 312 8268793/g, settings.appliner_whatsapp),
-  }))
 
   return (
     <section className="section-padding relative">
@@ -41,7 +30,7 @@ export default function FAQ() {
         </motion.div>
 
         <div className="space-y-3">
-          {liveFaqs.map((faq, idx) => (
+          {faqs.map((faq, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}

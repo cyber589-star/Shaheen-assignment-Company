@@ -1,10 +1,9 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Shield, Users, CheckCircle, XCircle, Trash2, Eye, EyeOff, LogOut, RefreshCw, Search, BarChart3, DollarSign, FileText, TrendingUp, Clock, ChevronDown, ExternalLink, ImageIcon, Phone, Mail, BookOpen, CreditCard, Hash, FileInput, User, Settings, Save } from 'lucide-react'
+import { Shield, Users, CheckCircle, XCircle, Trash2, Eye, EyeOff, LogOut, RefreshCw, Search, BarChart3, DollarSign, FileText, TrendingUp, Clock, ChevronDown, ExternalLink, ImageIcon, Phone, Mail, BookOpen, CreditCard, Hash, FileInput, User } from 'lucide-react'
 import { getUsers, getAnalytics, updateUser, deleteUser, adminLogin, checkTables } from '@/lib/supabase'
-import { fetchSiteSettings, saveSiteSettings, refreshSiteSettings, defaultSettings, type SiteSettings } from '@/lib/useSiteSettings'
 import { companyInfo } from '@/data/content'
 import Image from 'next/image'
 
@@ -20,8 +19,6 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false)
   const [expandedId, setExpandedId] = useState<string | null>(null)
   const [enlargeImg, setEnlargeImg] = useState<string | null>(null)
-  const [settings, setSettings] = useState<SiteSettings>(defaultSettings)
-  const [savingSettings, setSavingSettings] = useState(false)
 
   const handleLogin = () => {
     if (!password) return
@@ -35,29 +32,14 @@ export default function AdminPage() {
   const loadData = async () => {
     setLoading(true)
     try {
-      const [a, u, s] = await Promise.all([getAnalytics(), getUsers(), fetchSiteSettings()])
+      const [a, u] = await Promise.all([getAnalytics(), getUsers()])
       setAnalytics(a)
       setUsers(u || [])
-      setSettings(s)
     } catch (e: any) {
       console.error('Admin load error:', e?.message || JSON.stringify(e))
     }
     setLoading(false)
   }
-
-  const handleSaveSettings = async () => {
-    setSavingSettings(true)
-    try {
-      await saveSiteSettings(settings)
-      refreshSiteSettings() // live-update the whole website instantly
-      alert('Settings saved! Website now shows the new numbers.')
-    } catch (e: any) {
-      alert('Could not save on this server (it is read-only, e.g. Vercel).\n\nTo change settings: edit the file src/data/site-settings.json on GitHub and the site will update automatically after redeploy.\n\n(Local server / npm run dev: saving works normally.)')
-    }
-    setSavingSettings(false)
-  }
-
-  const setField = (key: keyof SiteSettings, value: string) => setSettings((s) => ({ ...s, [key]: value }))
 
   useEffect(() => {
     checkTables()
@@ -87,7 +69,6 @@ export default function AdminPage() {
     { id: 'users', label: 'Users', icon: Users },
     { id: 'payments', label: 'Payments', icon: DollarSign },
     { id: 'orders', label: 'Orders', icon: FileText },
-    { id: 'settings', label: 'Settings', icon: Settings },
   ]
 
   const formatDate = (d: string) => {
@@ -100,7 +81,7 @@ export default function AdminPage() {
     { label: 'User ID', value: u.id?.slice(0, 8) + '...', icon: Hash },
     { label: 'Full Name', value: u.name, icon: User },
     { label: 'WhatsApp', value: u.whatsapp, icon: Phone },
-    { label: 'Email', value: u.email || '—', icon: Mail },
+    { label: 'Email', value: u.email || 'â€”', icon: Mail },
     { label: 'Package', value: u.package?.toUpperCase(), icon: CreditCard },
     { label: 'Work', value: u.course, icon: BookOpen },
     { label: 'Qualification', value: u.qualification, icon: FileInput },
@@ -108,8 +89,8 @@ export default function AdminPage() {
     { label: 'Payment Method', value: u.payment_method?.toUpperCase(), icon: DollarSign },
     { label: 'Payment Number', value: u.payment_number, icon: Phone },
     { label: 'Transaction ID', value: u.transaction_id, icon: Hash },
-    { label: 'Referral Number', value: u.referral_code || '—', icon: ExternalLink },
-    { label: 'Notes', value: u.notes || '—', icon: FileText },
+    { label: 'Referral Number', value: u.referral_code || 'â€”', icon: ExternalLink },
+    { label: 'Notes', value: u.notes || 'â€”', icon: FileText },
     { label: 'Registered', value: formatDate(u.created_at), icon: Clock },
   ]
 
@@ -160,7 +141,7 @@ export default function AdminPage() {
             </motion.div>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
               className="mt-6 pt-4 border-t border-white/5">
-              <p className="text-[10px] text-white/20 mono">Secured Access • Admin Only</p>
+              <p className="text-[10px] text-white/20 mono">Secured Access â€¢ Admin Only</p>
             </motion.div>
           </div>
         </motion.div>
@@ -319,8 +300,8 @@ export default function AdminPage() {
                         <p className="text-white/30 mono truncate">{user.whatsapp || 'N/A'}</p>
                       </div>
                       <div className="hidden sm:block min-w-0">
-                        <p className="text-white/50 truncate">{user.email || '—'}</p>
-                        <p className="text-white/30 mono truncate">{user.course || '—'}</p>
+                        <p className="text-white/50 truncate">{user.email || 'â€”'}</p>
+                        <p className="text-white/30 mono truncate">{user.course || 'â€”'}</p>
                       </div>
                       <div className="min-w-0">
                         <span className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-semibold ${
@@ -422,17 +403,13 @@ export default function AdminPage() {
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
               <div className="glass rounded-xl p-5 border-white/10">
                 <p className="text-lime font-bold text-xs mono mb-2">EASYPAISA</p>
-                <p className="text-xl font-bold text-white">{settings.easypaisa_number}</p>
-                <p className="text-white/40 text-sm mt-0.5">{settings.easypaisa_name}</p>
+                <p className="text-xl font-bold text-white">{companyInfo.easypaisa.number}</p>
+                <p className="text-white/40 text-sm mt-0.5">{companyInfo.easypaisa.name}</p>
               </div>
               <div className="glass rounded-xl p-5 border-white/10">
                 <p className="text-lime font-bold text-xs mono mb-2">JAZZCASH</p>
-                <p className="text-xl font-bold text-white">{settings.jazzcash_number}</p>
-                <p className="text-white/40 text-sm mt-0.5">{settings.jazzcash_name}</p>
-              </div>
-              <div className="glass rounded-xl p-5 border-white/10 sm:col-span-2">
-                <p className="text-lime font-bold text-xs mono mb-2">APPLIER / SUPPORT WHATSAPP</p>
-                <p className="text-xl font-bold text-white">{settings.appliner_whatsapp}</p>
+                <p className="text-xl font-bold text-white">{companyInfo.jazzcash.number}</p>
+                <p className="text-white/40 text-sm mt-0.5">{companyInfo.jazzcash.name}</p>
               </div>
             </div>
             <div className="glass rounded-xl p-5 border-white/5 text-center">
@@ -464,7 +441,7 @@ export default function AdminPage() {
               <div className="space-y-2 max-h-60 overflow-y-auto">
                 {users.slice(0, 10).map((u: any) => (
                   <div key={u.id} className="flex items-center justify-between text-xs py-1.5 border-b border-white/5 last:border-0">
-                    <span className="text-white/60 truncate max-w-[200px]">{u.name} — {u.package?.toUpperCase()}</span>
+                    <span className="text-white/60 truncate max-w-[200px]">{u.name} â€” {u.package?.toUpperCase()}</span>
                     <span className={`shrink-0 px-1.5 py-0.5 rounded text-[9px] font-semibold ${
                       u.status === 'approved' ? 'bg-emerald-500/10 text-emerald-400' :
                       u.status === 'rejected' ? 'bg-red-500/10 text-red-400' :
@@ -473,102 +450,6 @@ export default function AdminPage() {
                   </div>
                 ))}
                 {users.length === 0 && <p className="text-white/20 text-xs text-center py-4">No activity yet</p>}
-              </div>
-            </div>
-          </div>
-        )}
-        {/* Settings */}
-        {activeTab === 'settings' && (
-          <div className="glass rounded-[2rem] p-6 border-white/10 max-w-2xl">
-            <h2 className="font-bold text-white mb-1">Website Settings</h2>
-            <p className="text-white/40 text-xs mono mb-6">Saved to the single file: src/data/site-settings.json</p>
-            <details className="glass rounded-2xl p-4 border-white/10 mb-6">
-              <summary className="text-xs text-white/50 mono uppercase tracking-wider cursor-pointer hover:text-lime">View current JSON</summary>
-              <pre className="mt-3 text-[11px] text-lime/80 overflow-x-auto whitespace-pre-wrap break-all">{JSON.stringify(settings, null, 2)}</pre>
-            </details>
-
-            <div className="space-y-6">
-              {/* EasyPaisa */}
-              <div className="glass rounded-2xl p-5 border-white/10">
-                <p className="text-lime font-bold text-xs mono mb-4">EASYPAISA</p>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">Account Number</label>
-                    <input type="text" value={settings.easypaisa_number} onChange={(e) => setField('easypaisa_number', e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">Account Name</label>
-                    <input type="text" value={settings.easypaisa_name} onChange={(e) => setField('easypaisa_name', e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
-                  </div>
-                </div>
-              </div>
-
-              {/* JazzCash */}
-              <div className="glass rounded-2xl p-5 border-white/10">
-                <p className="text-lime font-bold text-xs mono mb-4">JAZZCASH</p>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">Account Number</label>
-                    <input type="text" value={settings.jazzcash_number} onChange={(e) => setField('jazzcash_number', e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">Account Name</label>
-                    <input type="text" value={settings.jazzcash_name} onChange={(e) => setField('jazzcash_name', e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Applier / Support WhatsApp */}
-              <div className="glass rounded-2xl p-5 border-white/10">
-                <p className="text-lime font-bold text-xs mono mb-4">APPLIER / SUPPORT WHATSAPP</p>
-                <div>
-                  <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">WhatsApp Number</label>
-                  <input type="text" value={settings.appliner_whatsapp} onChange={(e) => setField('appliner_whatsapp', e.target.value)}
-                    placeholder="+92 3XX XXXXXXX"
-                    className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
-                </div>
-              </div>
-
-              {/* Team */}
-              <div className="glass rounded-2xl p-5 border-white/10">
-                <p className="text-lime font-bold text-xs mono mb-4">TEAM (CEO, VICE OWNER, APPLINERS)</p>
-                <div className="grid sm:grid-cols-2 gap-3 mb-4">
-                  <div>
-                    <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">CEO Name</label>
-                    <input type="text" value={settings.ceo_name} onChange={(e) => setField('ceo_name', e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">Vice Owner Name</label>
-                    <input type="text" value={settings.vice_owner_name} onChange={(e) => setField('vice_owner_name', e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all" />
-                  </div>
-                </div>
-                <label className="block text-[10px] text-white/40 mono uppercase tracking-wider mb-1.5">Senior Appliners (one per line)</label>
-                <textarea rows={6} value={settings.senior_appliners.split(',').map((n) => n.trim()).join('\n')}
-                  onChange={(e) => setField('senior_appliners', e.target.value.split('\n').map((n) => n.trim()).filter(Boolean).join(', '))}
-                  className="w-full px-4 py-2.5 rounded-xl glass border-white/10 text-sm text-white placeholder:text-white/20 focus:border-lime/50 focus:outline-none transition-all resize-none"
-                  placeholder={'Sania Gafoor\nAlia Waheed'} />
-              </div>
-
-              <div className="flex items-center gap-3 flex-wrap">
-                <button onClick={handleSaveSettings} disabled={savingSettings}
-                  className="btn-lime flex items-center gap-2 text-sm py-3 px-6 disabled:opacity-40">
-                  {savingSettings ? (
-                    <>
-                      <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" /></svg>
-                      Saving...
-                    </>
-                  ) : (<><Save size={14} /> Save Settings</>)}
-                </button>
-                <button onClick={() => setSettings(defaultSettings)}
-                  className="px-4 py-3 rounded-xl glass text-white/40 text-sm hover:text-white transition-all">
-                  Reset to Current Defaults
-                </button>
               </div>
             </div>
           </div>

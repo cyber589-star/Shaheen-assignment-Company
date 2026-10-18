@@ -5,12 +5,10 @@ import { motion, useInView } from 'framer-motion'
 import { Upload, Clock, Copy, ExternalLink, Banknote } from 'lucide-react'
 import { companyInfo, packages } from '@/data/content'
 import { addUser, generateReferralCode, uploadScreenshot, updateUser } from '@/lib/supabase'
-import { useSiteSettings } from '@/lib/useSiteSettings'
 import toast from 'react-hot-toast'
 
 export default function PaymentForm({ selectedPackage: initialPkg, onClose }: { selectedPackage?: string; onClose?: () => void }) {
   const ref = useRef<HTMLDivElement>(null)
-  const settings = useSiteSettings()
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -171,9 +169,9 @@ export default function PaymentForm({ selectedPackage: initialPkg, onClose }: { 
                     </span>
                     <span className="text-[10px] bg-lime/10 text-lime px-2 py-1 rounded-full mono uppercase whitespace-nowrap shrink-0">Active</span>
                   </div>
-                  <p className="font-bold text-white text-lg sm:text-xl text-safe break-all">{settings.easypaisa_number}</p>
-                  <p className="text-white/50 text-sm mt-0.5 text-safe">Name: {settings.easypaisa_name}</p>
-                  <button onClick={() => copyNumber(settings.easypaisa_number)}
+                  <p className="font-bold text-white text-lg sm:text-xl text-safe break-all">{companyInfo.easypaisa.number}</p>
+                  <p className="text-white/50 text-sm mt-0.5 text-safe">Name: {companyInfo.easypaisa.name}</p>
+                  <button onClick={() => copyNumber(companyInfo.easypaisa.number)}
                     className="mt-3 flex items-center gap-1.5 text-lime text-xs hover:text-lime-dark transition-colors bg-white/5 px-3 py-1.5 rounded-xl mono">
                     <Copy size={11} /> Copy Number
                   </button>
@@ -187,33 +185,12 @@ export default function PaymentForm({ selectedPackage: initialPkg, onClose }: { 
                     </span>
                     <span className="text-[10px] bg-lime/10 text-lime px-2 py-1 rounded-full mono uppercase whitespace-nowrap shrink-0">Active</span>
                   </div>
-                  <p className="font-bold text-white text-lg sm:text-xl text-safe break-all">{settings.jazzcash_number}</p>
-                  <p className="text-white/50 text-sm mt-0.5 text-safe">Name: {settings.jazzcash_name}</p>
-                  <button onClick={() => copyNumber(settings.jazzcash_number)}
+                  <p className="font-bold text-white text-lg sm:text-xl text-safe break-all">{companyInfo.jazzcash.number}</p>
+                  <p className="text-white/50 text-sm mt-0.5 text-safe">Name: {companyInfo.jazzcash.name}</p>
+                  <button onClick={() => copyNumber(companyInfo.jazzcash.number)}
                     className="mt-3 flex items-center gap-1.5 text-lime text-xs hover:text-lime-dark transition-colors bg-white/5 px-3 py-1.5 rounded-xl mono">
                     <Copy size={11} /> Copy Number
                   </button>
-                </div>
-                <div className="glass rounded-2xl p-4 sm:p-5 border-white/10 relative overflow-hidden card-safe">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-lime/5 rounded-full blur-2xl pointer-events-none" />
-                  <div className="flex items-center justify-between mb-2 overflow-hidden">
-                    <span className="text-sm font-semibold text-lime flex items-center gap-1.5 text-safe">
-                      <span className="w-2 h-2 rounded-full bg-lime shrink-0" />
-                      Applier / Support WhatsApp
-                    </span>
-                    <span className="text-[10px] bg-lime/10 text-lime px-2 py-1 rounded-full mono uppercase whitespace-nowrap shrink-0">Active</span>
-                  </div>
-                  <p className="font-bold text-white text-lg sm:text-xl text-safe break-all">{settings.appliner_whatsapp}</p>
-                  <div className="flex items-center gap-3 mt-3">
-                    <button onClick={() => copyNumber(settings.appliner_whatsapp)}
-                      className="flex items-center gap-1.5 text-lime text-xs hover:text-lime-dark transition-colors bg-white/5 px-3 py-1.5 rounded-xl mono">
-                      <Copy size={11} /> Copy Number
-                    </button>
-                    <a href={`https://wa.me/${settings.appliner_whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-lime text-xs hover:text-lime-dark transition-colors bg-white/5 px-3 py-1.5 rounded-xl mono">
-                      <ExternalLink size={11} /> Chat on WhatsApp
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>

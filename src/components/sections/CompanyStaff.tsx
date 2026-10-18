@@ -3,22 +3,11 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Users, Crown, Award, Shield } from 'lucide-react'
-import { useSiteSettings } from '@/lib/useSiteSettings'
+import { staff } from '@/data/content'
 
 export default function CompanyStaff() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
-  const settings = useSiteSettings()
-
-  const staff = {
-    ceo: { name: settings.ceo_name || 'Malik-Mateen', role: 'CEO of Company' },
-    viceOwner: { name: settings.vice_owner_name || 'Kainat Waseem', role: 'Company Vice Owner' },
-    seniorAppliners: settings.senior_appliners
-      .split(',')
-      .map((n) => n.trim())
-      .filter(Boolean)
-      .map((name) => ({ name, role: 'Senior Appliner' })),
-  }
 
   return (
     <section id="staff" className="section-padding relative">

@@ -4,20 +4,17 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Phone, Mail, MapPin, Clock, ExternalLink, Send, MessageCircle } from 'lucide-react'
 import { companyInfo } from '@/data/content'
-import { useSiteSettings } from '@/lib/useSiteSettings'
+
+const contactItems = [
+  { icon: Phone, label: 'WhatsApp Channel', value: 'Join our WhatsApp Channel', href: 'https://www.whatsapp.com/channel/0029VbCOSaIJ93wT38mvGM0C', color: 'text-lime' },
+  { icon: Mail, label: 'Email', value: companyInfo.email, href: `mailto:${companyInfo.email}`, color: 'text-lime' },
+  { icon: MapPin, label: 'Location', value: 'Pakistan', href: '#', color: 'text-white/50' },
+  { icon: Clock, label: 'Office Hours', value: companyInfo.officeHours, href: '#', color: 'text-white/50' },
+]
 
 export default function Contact() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
-  const settings = useSiteSettings()
-
-  const contactItems = [
-    { icon: Phone, label: 'Applier / Support WhatsApp', value: settings.appliner_whatsapp, href: `https://wa.me/${settings.appliner_whatsapp.replace(/[^0-9]/g, '')}`, color: 'text-lime' },
-    { icon: Phone, label: 'WhatsApp Channel', value: 'Join our WhatsApp Channel', href: 'https://www.whatsapp.com/channel/0029VbCOSaIJ93wT38mvGM0C', color: 'text-lime' },
-    { icon: Mail, label: 'Email', value: companyInfo.email, href: `mailto:${companyInfo.email}`, color: 'text-lime' },
-    { icon: MapPin, label: 'Location', value: 'Pakistan', href: '#', color: 'text-white/50' },
-    { icon: Clock, label: 'Office Hours', value: companyInfo.officeHours, href: '#', color: 'text-white/50' },
-  ]
 
   return (
     <section id="contact" className="section-padding relative">
