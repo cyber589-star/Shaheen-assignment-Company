@@ -55,17 +55,6 @@ export default function CompanyStaff() {
           <p className="text-lime text-sm font-semibold mono uppercase tracking-wider mt-1">{staff.ceo.role}</p>
         </motion.div>
 
-        {/* Vice Owner */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="glass glass-hover rounded-[2rem] p-6 sm:p-8 border-lime/20 max-w-sm mx-auto mb-10 text-center overflow-hidden card-safe"
-        >
-          <h3 className="text-xl font-bold text-white text-safe">{staff.viceOwner.name}</h3>
-          <p className="text-lime text-sm font-semibold mono uppercase tracking-wider mt-1">{staff.viceOwner.role}</p>
-        </motion.div>
-
         {/* Senior Appliners */}
         <div className="text-center mb-6">
           <h3 className="text-lg sm:text-xl font-bold text-white flex items-center justify-center gap-2 text-safe">

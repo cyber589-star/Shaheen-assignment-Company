@@ -152,11 +152,6 @@ export const staff = {
     role: 'CEO of Company',
     image: null,
   },
-  viceOwner: {
-    name: 'Kainat Waseem',
-    role: 'Company Vice Owner',
-    image: null,
-  },
   seniorAppliners: [
     { name: 'Sania Gafoor', role: 'Senior Appliner' },
     { name: 'Alia Waheed', role: 'Senior Appliner' },
