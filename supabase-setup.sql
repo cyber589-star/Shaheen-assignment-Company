@@ -1,4 +1,4 @@
--- Run this SQL in your Supabase Dashboard SQL Editor
+﻿-- Run this SQL in your Supabase Dashboard SQL Editor
 -- https://supabase.com/dashboard/project/grqshtimqjbbarfjpkaz/sql/new
 
 -- ===== Users table =====
@@ -92,32 +92,3 @@ DROP POLICY IF EXISTS "anon_insert_contacts" ON contacts;
 CREATE POLICY "anon_insert_contacts" ON contacts FOR INSERT TO anon WITH CHECK (true);
 DROP POLICY IF EXISTS "anon_select_contacts" ON contacts;
 CREATE POLICY "anon_select_contacts" ON contacts FOR SELECT TO anon USING (true);
-
--- ===== Settings table (admin-editable website numbers) =====
-CREATE TABLE IF NOT EXISTS settings (
-  key TEXT PRIMARY KEY,
-  value TEXT NOT NULL,
-  updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-INSERT INTO settings (key, value) VALUES
-  ('easypaisa_number', '03420423970'),
-  ('easypaisa_name', 'Ansha Gull'),
-  ('jazzcash_number', '03420423970'),
-  ('jazzcash_name', 'Mateen Ahmad'),
-  ('appliner_whatsapp', '+923128268793')
-ON CONFLICT (key) DO NOTHING;
-
--- Settings policies
-DROP POLICY IF EXISTS "anon_select_settings" ON settings;
-CREATE POLICY "anon_select_settings" ON settings FOR SELECT TO anon USING (true);
-DROP POLICY IF EXISTS "anon_insert_settings" ON settings;
-CREATE POLICY "anon_insert_settings" ON settings FOR INSERT TO anon WITH CHECK (true);
-DROP POLICY IF EXISTS "anon_update_settings" ON settings;
-CREATE POLICY "anon_update_settings" ON settings FOR UPDATE TO anon USING (true);
-
-INSERT INTO settings (key, value) VALUES
-  ('ceo_name', 'Malik-Mateen'),
-  ('vice_owner_name', 'Kainat Waseem'),
-  ('senior_appliners', 'Sania Gafoor, Alia Waheed, Mishal Malik, Fizza Sami, Abeera Safdar, Muskan Malik, Zarish Hayyat, Muqadas Quyyum')
-ON CONFLICT (key) DO NOTHING;

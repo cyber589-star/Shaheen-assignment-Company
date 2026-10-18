@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Shield, Users, CheckCircle, XCircle, Trash2, Eye, EyeOff, LogOut, RefreshCw, Search, BarChart3, DollarSign, FileText, TrendingUp, Clock, ChevronDown, ExternalLink, ImageIcon, Phone, Mail, BookOpen, CreditCard, Hash, FileInput, User, Settings, Save } from 'lucide-react'
-import { getUsers, getAnalytics, updateUser, deleteUser, adminLogin, checkTables, getSiteSettings, saveSiteSettings, defaultSettings, type SiteSettings } from '@/lib/supabase'
-import { refreshSiteSettings } from '@/lib/useSiteSettings'
+import { getUsers, getAnalytics, updateUser, deleteUser, adminLogin, checkTables } from '@/lib/supabase'
+import { fetchSiteSettings, saveSiteSettings, refreshSiteSettings, defaultSettings, type SiteSettings } from '@/lib/useSiteSettings'
 import { companyInfo } from '@/data/content'
 import Image from 'next/image'
 
@@ -35,7 +35,7 @@ export default function AdminPage() {
   const loadData = async () => {
     setLoading(true)
     try {
-      const [a, u, s] = await Promise.all([getAnalytics(), getUsers(), getSiteSettings()])
+      const [a, u, s] = await Promise.all([getAnalytics(), getUsers(), fetchSiteSettings()])
       setAnalytics(a)
       setUsers(u || [])
       setSettings(s)
@@ -52,7 +52,7 @@ export default function AdminPage() {
       refreshSiteSettings() // live-update the whole website instantly
       alert('Settings saved! Website now shows the new numbers.')
     } catch (e: any) {
-      alert('Save failed: ' + (e?.message || 'unknown error') + '\n\nIf the "settings" table is missing, run the SQL at the bottom of supabase-setup.sql in Supabase SQL Editor.')
+      alert('Save failed: ' + (e?.message || 'unknown error'))
     }
     setSavingSettings(false)
   }
